@@ -22,7 +22,7 @@ AttackLens is an isolated virtual lab where common network and web attacks are s
 
 \- \[ ] Week 2: Suricata installation and rule basics
 
-\- \[ ] Week 3: Attack simulation and baseline results
+\- \[x] Week 3: Attack simulation and baseline results
 
 \- \[ ] Week 4: Custom rules and tuning
 
