@@ -7,7 +7,7 @@ Testing done with Suricata's **default** Emerging Threats Open ruleset only (no 
 | 1 | ICMP ping | `ping -c 4 192.168.56.102` | No | LAB ICMP ping detected | Caught by my own custom rule, sid 1000001. Default rules did not alert on plain ping. |
 | 2 | Port scan | `nmap -sS 192.168.56.102` | No | LAB possible SYN port scan | Caught by my own custom rule, sid 1000002. Default rules did not alert on the scan itself. |
 | 3 | SSH brute force | `hydra -l harshita -P passwords.txt ssh 192.168.56.102` | No | None | auth.log showed repeated failed logins and an srclimit_penalise entry (SSH's own throttling). Suricata default rules did not alert. |
-| 4 | SQL Injection | DVWA User ID field, OR-based payload | Pending | | |
+| 4 | SQL Injection | DVWA User ID field: `1' OR '1'='1` and `1' UNION SELECT user, password FROM users -- -` | Partial | SURICATA HTTP Response excessive header repetition (sid 2221036) | OR payload returned all 5 users instead of 1. UNION payload extracted all usernames and MD5 password hashes directly from the database. No SQLi-specific signature fired; only a generic HTTP anomaly rule triggered, likely incidental. Addressed with a custom rule in Week 4. |
 | 5 | XSS | DVWA name field, script tag payload | Pending | | |
 | 6 | SYN flood | `hping3 -S -p 80 --flood 192.168.56.102` | Pending | | |
 
