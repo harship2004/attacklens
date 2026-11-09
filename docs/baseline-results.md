@@ -16,7 +16,7 @@ Testing done with Suricata's **default** Emerging Threats Open ruleset only (no 
 |---|---|---|---|---|
 | 3 | SSH brute force | No | **Yes** | LAB possible SSH brute force (sid 1000003) - alerts when 5+ SYN connections to port 22 arrive from one source within 10 seconds|
 | 4 | SQL Injection | Partial (incidental only) | **Yes** | LAB possible SQL Injection attempt (sid 1000004) - alerts on HTTP requests containing both "UNION" and "SELECT" |
-
+| 5 | XSS (Reflected + Stored) | Partial (incidental only) | **Yes** | LAB possible XSS attempt (sid 1000005) - alerts on HTTP requests containing "<scrip" |
 ## Observations
 
 - Default Suricata rules focus on known malware, scanning tools, and protocol anomalies, not generic lab traffic like a single ping or a single Nmap scan.
