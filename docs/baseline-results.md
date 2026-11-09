@@ -11,6 +11,11 @@ Testing done with Suricata's **default** Emerging Threats Open ruleset only (no 
 | 5 | XSS (Reflected + Stored) | DVWA: `<script>alert('XSS test')</script>` in Reflected and Stored XSS fields | Partial | SURICATA HTTP Response excessive header repetition (sid 2221036) | Reflected XSS executed immediately on submit. Stored XSS executed on submit and again on every page reload, confirming the payload was saved server-side. No XSS-specific signature fired; only the same generic HTTP anomaly rule triggered. Addressed with a custom rule in Week 4. |
 | 6 | SYN Flood | `hping3 -S -p 80 --flood 192.168.56.102` (run ~10 seconds) | Yes | LAB possible SYN port scan (sid 1000002); SURICATA STREAM 3way handshake SYN resend different seq (sid 2210008); SURICATA STREAM 3way handshake SYNACK resend with different ack (sid 2210004) | Strongest detection result of the baseline. Both my custom scan-threshold rule and Suricata's built-in TCP stream-anomaly rules fired heavily, correctly identifying abnormal handshake behavior consistent with a flood attack. |
 
+## Week 4: Custom Rule Results (After Tuning)
+| # | Attack | Default rules (Week 3) | Custom rule (Week 4) | Rule used |
+|---|---|---|---|---|
+| 3 | SSH brute force | No | **Yes** | LAB possible SSH brute force (sid 1000003) - alerts when 5+ SYN connections to port 22 arrive from one source within 10 seconds|
+
 ## Observations
 
 - Default Suricata rules focus on known malware, scanning tools, and protocol anomalies, not generic lab traffic like a single ping or a single Nmap scan.
