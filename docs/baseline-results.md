@@ -15,6 +15,7 @@ Testing done with Suricata's **default** Emerging Threats Open ruleset only (no 
 | # | Attack | Default rules (Week 3) | Custom rule (Week 4) | Rule used |
 |---|---|---|---|---|
 | 3 | SSH brute force | No | **Yes** | LAB possible SSH brute force (sid 1000003) - alerts when 5+ SYN connections to port 22 arrive from one source within 10 seconds|
+| 4 | SQL Injection | Partial (incidental only) | **Yes** | LAB possible SQL Injection attempt (sid 1000004) - alerts on HTTP requests containing both "UNION" and "SELECT" |
 
 ## Observations
 
