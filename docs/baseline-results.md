@@ -24,6 +24,10 @@ Testing done with Suricata's **default** Emerging Threats Open ruleset only (no 
 - Background noise was observed on the host-only network (Spotify P2P discovery broadcasts from the Windows host), unrelated to the lab attacks.
 - This baseline motivates Week 4: writing custom rules for brute force, SQL injection, and XSS detection, since the defaults miss them.
 
+## Rule Refinement Note
+
+During testing, the SSH brute force rule (sid 1000003) was initially written with `$HOME_NET any` instead of `$HOME_NET 22`, causing it to incorrectly match SYN scan traffic across many ports. This was identified by comparing alert destination ports during an Nmap scan, and fixed by restricting the rule to port 22 specifically (rev:2). This highlights the importance of precise rule scoping to avoid false positives.
+
 ## Summary
 
 Across all six attacks, Suricata's default Emerging Threats Open ruleset reliably detected only the SYN flood, which triggered both a custom threshold rule and built-in TCP stream-anomaly signatures. Simple network probes (ping, port scan) and the slow, low-volume SSH brute force were missed entirely by default rules. Application-layer attacks (SQL injection, XSS) triggered only an incidental generic HTTP anomaly signature, not true content-aware detection. This shows that out-of-the-box IDS rules are strong against obvious network-layer floods but weak against quieter or application-layer attacks, which is the gap addressed with custom Suricata rules in Week 4.
